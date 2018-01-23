@@ -10,6 +10,9 @@ public class ForecastWrapper extends RealmObject {
     private int cityID;
     private ArrayList<Forecast> forecasts;
 
+    public ForecastWrapper() {
+    }
+
     public ForecastWrapper(int lastUpdated, int cityID, ArrayList<Forecast> forecasts) {
         this.lastUpdated = lastUpdated;
         this.cityID = cityID;

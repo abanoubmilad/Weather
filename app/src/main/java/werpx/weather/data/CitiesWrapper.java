@@ -9,6 +9,9 @@ public class CitiesWrapper extends RealmObject {
     private int lastUpdated;
     private ArrayList<CityWeather> cities;
 
+    public CitiesWrapper() {
+    }
+
     public CitiesWrapper(int lastUpdated, ArrayList<CityWeather> cities) {
         this.lastUpdated = lastUpdated;
         this.cities = cities;

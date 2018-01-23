@@ -11,6 +11,8 @@ public class Forecast extends RealmObject {
     private double minTemp;
     private double maxTemp;
 
+    public Forecast() {
+    }
 
     public Forecast(long timeStamp, double dayTemp, double minTemp, double maxTemp) {
         this.timeStamp = timeStamp;

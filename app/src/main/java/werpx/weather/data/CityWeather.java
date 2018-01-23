@@ -8,6 +8,9 @@ public class CityWeather extends RealmObject {
     private String name;
     private String temp;
 
+    public CityWeather() {
+    }
+
     public CityWeather(int id, String name, String temp) {
         this.id = id;
         this.name = name;

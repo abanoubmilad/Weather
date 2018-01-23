@@ -8,6 +8,9 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 
 public class Utility {
+    public static final String FORECAST_DATE_FORMAT="EEE yyyy/MM/dd";
+    public static final String LAST_UPDATED_DATE_FORMAT="EEE yyyy/MM/dd HH:mm";
+
     public static  boolean isNetworkAvailable(Context context) {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);

@@ -10,7 +10,7 @@
     <string name="action_contact_us">Contact Us</string>
 
     <string name="label_city_name">City name</string>
-    <string name="label_city_temp">City temperature</string>
+    <string name="label_temp_unit">°C</string>
 
 
     <string name="label_timestamp">Date</string>

@@ -11,11 +11,12 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import werpx.weather.R;
+import werpx.weather.Utility;
 import werpx.weather.data.Forecast;
 
 public class ForecastAdapter extends Adapter<Forecast> {
 
-    private final SimpleDateFormat dateFormatter = new SimpleDateFormat("EEE yyyy/MM/dd");
+    private final SimpleDateFormat dateFormatter = new SimpleDateFormat(Utility.FORECAST_DATE_FORMAT);
 
     public ForecastAdapter(Context context, ArrayList<Forecast> forecastDays) {
         super(context, 0, forecastDays);

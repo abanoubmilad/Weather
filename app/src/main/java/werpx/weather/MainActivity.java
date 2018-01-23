@@ -30,7 +30,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         lastUpdate = (TextView) findViewById(R.id.last_update);
-        lastUpdate.setText("last update: " + new SimpleDateFormat("EEE yyyy/MM/dd HH:mm").format(new Date()));
+        lastUpdate.setText("last update: " + new SimpleDateFormat(Utility.LAST_UPDATED_DATE_FORMAT).format(new Date()));
 
         noInternetMessage = findViewById(R.id.no_internet);
         if (!Utility.isNetworkAvailable(getApplicationContext()))

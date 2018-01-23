@@ -9,7 +9,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import werpx.weather.R;
-import werpx.weather.adapter.Adapter;
 import werpx.weather.data.CityWeather;
 
 public class CityWeatherAdapter extends Adapter<CityWeather> {

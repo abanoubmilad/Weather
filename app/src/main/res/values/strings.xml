@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Weather</string>
+    <string name="app_name">Werpx Weather</string>
+    <string name="activity_forecast">Weather Forecast</string>
+    <string name="button_try_again">Try again</string>
+
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="action_contact_us">Contact Us</string>
 
     <string name="label_city_name">City name</string>
     <string name="label_city_temp">City temperature</string>

@@ -11,7 +11,7 @@
     <color name="grey">#323232</color>
     <color name="cyan">#1DCAFF</color>
     <color name="yellow">#D4D8D9</color>
-
+    <color name="bg">#f0f0f0</color>
     <color name="dark">#0091C2</color>
     <color name="light">#00A6D9</color>
 

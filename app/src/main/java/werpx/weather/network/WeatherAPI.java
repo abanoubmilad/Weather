@@ -9,7 +9,6 @@ import okhttp3.Request;
 import okhttp3.Response;
 import werpx.weather.BuildConfig;
 import werpx.weather.CustomCallback;
-import werpx.weather.network.HttpClient;
 
 
 public class WeatherAPI {
@@ -40,11 +39,10 @@ public class WeatherAPI {
             @Override
             public void onResponse(Call call, final Response response) throws IOException {
                 if (!response.isSuccessful()) {
-                 //   throw new IOException("Unexpected code " + response);
                     customCallback.onFailure(response.toString());
                 } else {
                     response.toString();
-                    customCallback.onSuccess(response.body());
+                    customCallback.onSuccess(response.body().string());
                 }
 
             }
@@ -69,11 +67,9 @@ public class WeatherAPI {
             @Override
             public void onResponse(Call call, final Response response) throws IOException {
                 if (!response.isSuccessful()) {
-                    //   throw new IOException("Unexpected code " + response);
                     customCallback.onFailure(response.toString());
                 } else {
-                    response.toString();
-                    customCallback.onSuccess(response.body());
+                    customCallback.onSuccess(response.body().string());
                 }
 
             }

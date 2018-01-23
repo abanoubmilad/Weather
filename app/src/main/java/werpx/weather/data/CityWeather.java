@@ -1,7 +1,9 @@
 package werpx.weather.data;
 
 
-public class CityWeather {
+import io.realm.RealmObject;
+
+public class CityWeather extends RealmObject {
     private int id;
     private String name;
     private String temp;
@@ -35,4 +37,5 @@ public class CityWeather {
     public void setTemp(String temp) {
         this.temp = temp;
     }
+
 }

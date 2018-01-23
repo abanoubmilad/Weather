@@ -1,7 +1,9 @@
 package werpx.weather.data;
 
 
-public class Forecast {
+import io.realm.RealmObject;
+
+public class Forecast extends RealmObject {
 
     private long timeStamp;
 
@@ -33,4 +35,19 @@ public class Forecast {
         return maxTemp;
     }
 
+    public void setTimeStamp(long timeStamp) {
+        this.timeStamp = timeStamp;
+    }
+
+    public void setDayTemp(double dayTemp) {
+        this.dayTemp = dayTemp;
+    }
+
+    public void setMinTemp(double minTemp) {
+        this.minTemp = minTemp;
+    }
+
+    public void setMaxTemp(double maxTemp) {
+        this.maxTemp = maxTemp;
+    }
 }

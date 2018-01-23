@@ -28,6 +28,10 @@ public class ForecastActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forecast);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         noInternetMessage = findViewById(R.id.no_internet);
         if(!Utility.isNetworkAvailable(getApplicationContext()))
             noInternetMessage.setVisibility(View.VISIBLE);
@@ -92,7 +96,10 @@ public class ForecastActivity extends ActionBarActivity {
             Utility.openContactUsWebPage(getApplicationContext());
             return true;
         }
-
+        if (id == android.R.id.home) {
+            finish();
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 }

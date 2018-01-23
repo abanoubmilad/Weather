@@ -5,4 +5,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
+    <string name="label_city_name">City name</string>
+    <string name="label_city_temp">City temperature</string>
+
 </resources>

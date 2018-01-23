@@ -1,4 +1,4 @@
-package werpx.weather;
+package werpx.weather.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,10 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+
+import werpx.weather.R;
+import werpx.weather.adapter.Adapter;
+import werpx.weather.data.Forecast;
 
 public class ForecastAdapter extends Adapter<Forecast> {
 

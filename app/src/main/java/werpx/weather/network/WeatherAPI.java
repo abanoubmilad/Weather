@@ -1,4 +1,4 @@
-package werpx.weather;
+package werpx.weather.network;
 
 import java.io.IOException;
 
@@ -7,6 +7,9 @@ import okhttp3.Callback;
 import okhttp3.HttpUrl;
 import okhttp3.Request;
 import okhttp3.Response;
+import werpx.weather.BuildConfig;
+import werpx.weather.CustomCallback;
+import werpx.weather.network.HttpClient;
 
 
 public class WeatherAPI {

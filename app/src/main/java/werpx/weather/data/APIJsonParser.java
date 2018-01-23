@@ -1,4 +1,4 @@
-package werpx.weather;
+package werpx.weather.data;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

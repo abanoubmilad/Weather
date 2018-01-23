@@ -1,4 +1,4 @@
-package werpx.weather;
+package werpx.weather.network;
 
 import okhttp3.OkHttpClient;
 

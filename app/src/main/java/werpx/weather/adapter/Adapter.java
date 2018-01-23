@@ -1,4 +1,4 @@
-package werpx.weather;
+package werpx.weather.adapter;
 
 import android.content.Context;
 import android.os.Build;

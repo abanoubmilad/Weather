@@ -1,4 +1,4 @@
-package werpx.weather;
+package werpx.weather.data;
 
 
 public class CityWeather {

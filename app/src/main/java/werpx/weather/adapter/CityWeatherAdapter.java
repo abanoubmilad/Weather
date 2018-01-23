@@ -1,4 +1,4 @@
-package werpx.weather;
+package werpx.weather.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import werpx.weather.R;
+import werpx.weather.adapter.Adapter;
+import werpx.weather.data.CityWeather;
 
 public class CityWeatherAdapter extends Adapter<CityWeather> {
 

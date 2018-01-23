@@ -71,8 +71,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/label_temp_unit"
                 android:textColor="@color/dynamic_text"
-                android:textSize="@dimen/font_normal"
-                android:layout_margin="10dp"
+                android:textSize="@dimen/font_large"
+                android:layout_marginRight="10dp"
                 android:gravity="right"/>
 
             <TextView
@@ -81,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/dynamic_text"
                 android:textSize="@dimen/font_extra"
-                android:layout_margin="10dp"
+                android:layout_marginRight="10dp"
                 android:gravity="right"/>
         </LinearLayout>
     </LinearLayout>

@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -52,6 +53,7 @@ public class ForecastActivity extends ActionBarActivity {
         currentCityID=intent.getIntExtra(EXTRA_ARGUMENT_ID,-1);
         currentCityName=intent.getStringExtra(EXTRA_ARGUMENT_NAME);
 
+        ((TextView) findViewById(R.id.city_name)).setText(currentCityName);
 
         Intractor.getCityForecast(currentCityID, new CustomCallback() {
             @Override

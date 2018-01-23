@@ -17,12 +17,13 @@ public class WeatherAPI {
     private final static String API_KEY_PARAMETER = "APPID";
     private final static String API_CITY_ID_PARAMETER = "id";
     private final static String API_CITY_FORECAST_COUNT_PARAMETER = "cnt";
+    private final static String API_UNITS_PARAMETER = "units";
 
     private final static String CITIES = "361058,6618607,5128638,360502,2911298";
-
     public static void getCityForecast(int cityID, final CustomCallback customCallback) {
         HttpUrl.Builder urlBuilder = HttpUrl.parse(API_URL + "/forecast/daily").newBuilder();
         urlBuilder.addQueryParameter(API_KEY_PARAMETER, BuildConfig.openweathermap_api_key);
+        urlBuilder.addQueryParameter(API_UNITS_PARAMETER, "metric");
         urlBuilder.addQueryParameter(API_CITY_ID_PARAMETER, cityID+"");
         urlBuilder.addQueryParameter(API_CITY_FORECAST_COUNT_PARAMETER, "5");
         String url = urlBuilder.build().toString();
@@ -52,6 +53,7 @@ public class WeatherAPI {
     public static void getCitiesWeather(final CustomCallback customCallback) {
         HttpUrl.Builder urlBuilder = HttpUrl.parse(API_URL + "/group").newBuilder();
         urlBuilder.addQueryParameter(API_KEY_PARAMETER, BuildConfig.openweathermap_api_key);
+        urlBuilder.addQueryParameter(API_UNITS_PARAMETER, "metric");
         urlBuilder.addQueryParameter(API_CITY_ID_PARAMETER, CITIES);
         String url = urlBuilder.build().toString();
 

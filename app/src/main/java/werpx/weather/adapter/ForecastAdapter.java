@@ -15,7 +15,7 @@ import werpx.weather.data.Forecast;
 
 public class ForecastAdapter extends Adapter<Forecast> {
 
-    private final SimpleDateFormat dateFormater = new SimpleDateFormat("EEE yyyy/MM/dd HH:mm");
+    private final SimpleDateFormat dateFormatter = new SimpleDateFormat("EEE yyyy/MM/dd");
 
     public ForecastAdapter(Context context, ArrayList<Forecast> forecastDays) {
         super(context, 0, forecastDays);
@@ -38,7 +38,7 @@ public class ForecastAdapter extends Adapter<Forecast> {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.timestamp.setText(dateFormater.format(new Date(forecastDay.getTimeStamp()*1000)));
+        holder.timestamp.setText(dateFormatter.format(new Date(forecastDay.getTimeStamp()*1000)));
         holder.temp.setText(forecastDay.getDayTemp()+"");
         holder.min.setText(forecastDay.getMinTemp()+"");
         holder.max.setText(forecastDay.getMaxTemp()+"");

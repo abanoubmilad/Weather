@@ -27,7 +27,7 @@ public class ForecastActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_forecast);
         noInternetMessage = findViewById(R.id.no_internet);
         if(!Utility.isNetworkAvailable(getApplicationContext()))
             noInternetMessage.setVisibility(View.VISIBLE);
@@ -52,12 +52,24 @@ public class ForecastActivity extends ActionBarActivity {
         Intractor.getCityForecast(currentCityID, new CustomCallback() {
             @Override
             public void onFailure(String failureMessage) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
 
+
+                    }
+                });
             }
 
             @Override
-            public void onSuccess(Object result) {
-                adapter.addAll((ArrayList<Forecast>) result);
+            public void onSuccess(final Object result) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        adapter.addAll((ArrayList<Forecast>) result);
+
+                    }
+                });
 
             }
         });

@@ -15,7 +15,7 @@ import werpx.weather.data.Forecast;
 
 public class ForecastAdapter extends Adapter<Forecast> {
 
-    private final SimpleDateFormat dateFormater = new SimpleDateFormat("yyyy.MM.dd HH.mm.ss");
+    private final SimpleDateFormat dateFormater = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
     public ForecastAdapter(Context context, ArrayList<Forecast> forecastDays) {
         super(context, 0, forecastDays);
@@ -27,7 +27,7 @@ public class ForecastAdapter extends Adapter<Forecast> {
         Forecast forecastDay = getItem(position);
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(
-                    R.layout.list_item_city, parent, false);
+                    R.layout.list_item_forecast, parent, false);
             holder = new ViewHolder();
             holder.timestamp = (TextView) convertView.findViewById(R.id.timestamp);
             holder.temp = (TextView) convertView.findViewById(R.id.day_temp);

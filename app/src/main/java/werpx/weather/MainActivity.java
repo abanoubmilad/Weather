@@ -40,32 +40,39 @@ public class MainActivity extends ActionBarActivity {
         adapter = new CityWeatherAdapter(getApplicationContext(), new ArrayList<CityWeather>());
         ListView lv = (ListView) findViewById(R.id.cities_list);
         lv.setAdapter(adapter);
-
-        lv.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                CityWeather cityWeather = adapter.getItem(i);
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                CityWeather cityWeather = adapter.getItem(position);
                 Intent intent = new Intent(getApplicationContext(), ForecastActivity.class);
                 intent.putExtra(ForecastActivity.EXTRA_ARGUMENT_NAME, cityWeather.getName());
                 intent.putExtra(ForecastActivity.EXTRA_ARGUMENT_ID, cityWeather.getId());
                 startActivity(intent);
             }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
         });
+
         Intractor.getCitiesWeather(new CustomCallback() {
             @Override
             public void onFailure(String failureMessage) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
 
+
+                    }
+                });
             }
 
             @Override
-            public void onSuccess(Object result) {
+            public void onSuccess(final Object result) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
 
-                adapter.addAll((ArrayList<CityWeather>) result);
+                        adapter.addAll((ArrayList<CityWeather>) result);
+
+                    }
+                });
             }
         });
     }

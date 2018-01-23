@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -20,10 +21,24 @@ public class ForecastActivity extends ActionBarActivity {
     private ForecastAdapter adapter;
     private int currentCityID;
     private String currentCityName;
+
+    private View noInternetMessage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        noInternetMessage = findViewById(R.id.no_internet);
+        if(!Utility.isNetworkAvailable(getApplicationContext()))
+            noInternetMessage.setVisibility(View.VISIBLE);
+        noInternetMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(Utility.isNetworkAvailable(getApplicationContext())) {
+                    noInternetMessage.setVisibility(View.GONE);
+                }
+            }
+        });
 
         adapter = new ForecastAdapter(getApplicationContext(), new ArrayList<Forecast>());
         ListView lv = (ListView) findViewById(R.id.forecast_list);

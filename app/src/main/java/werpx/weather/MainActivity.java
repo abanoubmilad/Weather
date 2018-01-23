@@ -13,17 +13,29 @@ import java.util.ArrayList;
 
 import werpx.weather.adapter.CityWeatherAdapter;
 import werpx.weather.data.CityWeather;
-import werpx.weather.data.Forecast;
 import werpx.weather.data.Intractor;
 
 
 public class MainActivity extends ActionBarActivity {
     private CityWeatherAdapter adapter;
+    private View noInternetMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        noInternetMessage = findViewById(R.id.no_internet);
+        if(!Utility.isNetworkAvailable(getApplicationContext()))
+            noInternetMessage.setVisibility(View.VISIBLE);
+        noInternetMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(Utility.isNetworkAvailable(getApplicationContext())) {
+                    noInternetMessage.setVisibility(View.GONE);
+                }
+            }
+        });
 
         adapter = new CityWeatherAdapter(getApplicationContext(), new ArrayList<CityWeather>());
         ListView lv = (ListView) findViewById(R.id.cities_list);

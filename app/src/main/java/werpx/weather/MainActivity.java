@@ -1,5 +1,6 @@
 package werpx.weather;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -90,6 +91,7 @@ public class MainActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         if (id == R.id.action_contact_us) {
+            Utility.openContactUsWebPage(getApplicationContext());
             return true;
         }
 

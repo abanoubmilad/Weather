@@ -8,4 +8,10 @@
     <string name="label_city_name">City name</string>
     <string name="label_city_temp">City temperature</string>
 
+
+    <string name="label_timestamp">Date</string>
+    <string name="label_day_temp">Day temperature</string>
+    <string name="label_min_temp">Min. temperature</string>
+    <string name="label_max_temp">Max. temperature</string>
+
 </resources>

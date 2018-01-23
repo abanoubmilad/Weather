@@ -3,16 +3,17 @@ package werpx.weather.data;
 
 import java.util.ArrayList;
 
+import io.realm.RealmList;
 import io.realm.RealmObject;
 
 public class CitiesWrapper extends RealmObject {
     private int lastUpdated;
-    private ArrayList<CityWeather> cities;
+    private RealmList<CityWeather> cities;
 
     public CitiesWrapper() {
     }
 
-    public CitiesWrapper(int lastUpdated, ArrayList<CityWeather> cities) {
+    public CitiesWrapper(int lastUpdated, RealmList<CityWeather> cities) {
         this.lastUpdated = lastUpdated;
         this.cities = cities;
     }
@@ -25,11 +26,11 @@ public class CitiesWrapper extends RealmObject {
         this.lastUpdated = lastUpdated;
     }
 
-    public ArrayList<CityWeather> getCities() {
+    public RealmList<CityWeather> getCities() {
         return cities;
     }
 
-    public void setCities(ArrayList<CityWeather> cities) {
+    public void setCities(RealmList<CityWeather> cities) {
         this.cities = cities;
     }
 }

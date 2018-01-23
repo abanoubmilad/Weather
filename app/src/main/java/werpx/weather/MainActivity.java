@@ -1,17 +1,56 @@
 package werpx.weather;
 
-import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+
+import werpx.weather.adapter.CityWeatherAdapter;
+import werpx.weather.data.CityWeather;
+import werpx.weather.data.Forecast;
+import werpx.weather.data.Intractor;
 
 
 public class MainActivity extends ActionBarActivity {
+    private CityWeatherAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        adapter = new CityWeatherAdapter(getApplicationContext(), new ArrayList<CityWeather>());
+        ListView lv = (ListView) findViewById(R.id.cities_list);
+        lv.setAdapter(adapter);
+
+        lv.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+              
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        Intractor.getCitiesWeather(new CustomCallback() {
+            @Override
+            public void onFailure(String failureMessage) {
+
+            }
+
+            @Override
+            public void onSuccess(Object result) {
+                adapter.clearThenAddAll((ArrayList<CityWeather>) result);
+            }
+        });
     }
 
 

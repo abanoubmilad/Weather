@@ -1,6 +1,5 @@
 package werpx.weather;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -9,8 +8,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import werpx.weather.adapter.CityWeatherAdapter;
 import werpx.weather.data.CityWeather;
@@ -20,19 +22,23 @@ import werpx.weather.data.Intractor;
 public class MainActivity extends ActionBarActivity {
     private CityWeatherAdapter adapter;
     private View noInternetMessage;
+    private TextView lastUpdate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        lastUpdate = (TextView) findViewById(R.id.last_update);
+        lastUpdate.setText("last update: " + new SimpleDateFormat("EEE yyyy/MM/dd HH:mm").format(new Date()));
+
         noInternetMessage = findViewById(R.id.no_internet);
-        if(!Utility.isNetworkAvailable(getApplicationContext()))
+        if (!Utility.isNetworkAvailable(getApplicationContext()))
             noInternetMessage.setVisibility(View.VISIBLE);
         noInternetMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(Utility.isNetworkAvailable(getApplicationContext())) {
+                if (Utility.isNetworkAvailable(getApplicationContext())) {
                     noInternetMessage.setVisibility(View.GONE);
                 }
             }

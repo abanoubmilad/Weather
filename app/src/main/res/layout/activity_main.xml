@@ -9,7 +9,14 @@
     android:background="@color/bg">
 
     <include layout="@layout/no_internet_view"></include>
-
+    <TextView
+        android:id="@+id/last_update"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_larger"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"/>
     <ListView
         android:id="@+id/cities_list"
 

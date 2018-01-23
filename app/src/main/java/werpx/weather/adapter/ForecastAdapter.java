@@ -15,7 +15,7 @@ import werpx.weather.data.Forecast;
 
 public class ForecastAdapter extends Adapter<Forecast> {
 
-    private final SimpleDateFormat dateFormater = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+    private final SimpleDateFormat dateFormater = new SimpleDateFormat("EEE yyyy/MM/dd HH:mm");
 
     public ForecastAdapter(Context context, ArrayList<Forecast> forecastDays) {
         super(context, 0, forecastDays);

@@ -32,7 +32,11 @@ public class MainActivity extends ActionBarActivity {
         lv.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-              
+                CityWeather cityWeather = adapter.getItem(i);
+                Intent intent = new Intent(getApplicationContext(), ForecastActivity.class);
+                intent.putExtra(ForecastActivity.EXTRA_ARGUMENT_NAME, cityWeather.getName());
+                intent.putExtra(ForecastActivity.EXTRA_ARGUMENT_ID, cityWeather.getId());
+                startActivity(intent);
             }
 
             @Override
@@ -48,7 +52,7 @@ public class MainActivity extends ActionBarActivity {
 
             @Override
             public void onSuccess(Object result) {
-                adapter.clearThenAddAll((ArrayList<CityWeather>) result);
+                adapter.addAll((ArrayList<CityWeather>) result);
             }
         });
     }

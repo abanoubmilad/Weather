@@ -3,77 +3,98 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/dynamic_bg"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_margin="5dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/label_timestamp"
-            android:textColor="@color/dynamic_text" />
+            android:textColor="@color/dynamic_text"
+            android:textSize="@dimen/font_normal"
+            android:layout_margin="10dp" />
 
         <TextView
             android:id="@+id/timestamp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/dynamic_text" />
+            android:textColor="@color/dynamic_text"
+            android:textSize="@dimen/font_largest"
+            android:layout_margin="10dp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/label_day_temp"
-            android:textColor="@color/dynamic_text" />
+            android:textColor="@color/dynamic_text"
+            android:textSize="@dimen/font_normal"
+            android:layout_margin="10dp" />
 
         <TextView
             android:id="@+id/day_temp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/dynamic_text" />
+            android:textColor="@color/dynamic_text"
+            android:textSize="@dimen/font_largest"
+            android:layout_margin="10dp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/label_min_temp"
-            android:textColor="@color/dynamic_text" />
+            android:textColor="@color/dynamic_text"
+            android:textSize="@dimen/font_normal"
+            android:layout_margin="10dp" />
 
         <TextView
             android:id="@+id/min_temp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/dynamic_text" />
+            android:textColor="@color/dynamic_text"
+            android:textSize="@dimen/font_largest"
+            android:layout_margin="10dp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/label_max_temp"
-            android:textColor="@color/dynamic_text" />
+            android:textColor="@color/dynamic_text"
+            android:textSize="@dimen/font_normal"
+            android:layout_margin="10dp" />
 
         <TextView
             android:id="@+id/max_temp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/dynamic_text" />
+            android:textColor="@color/dynamic_text"
+            android:textSize="@dimen/font_largest"
+            android:layout_margin="10dp" />
     </LinearLayout>
 </LinearLayout>

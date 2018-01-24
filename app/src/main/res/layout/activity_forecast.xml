@@ -16,6 +16,14 @@
         android:textSize="@dimen/font_largest"
         android:layout_gravity="center"
         android:layout_margin="5dp"/>
+    <TextView
+        android:id="@+id/last_update"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_larger"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"/>
 
     <ListView
         android:id="@+id/forecast_list"

@@ -26,6 +26,7 @@ public class ForecastActivity extends ActionBarActivity {
     private ForecastAdapter adapter;
     private int currentCityID;
     private String currentCityName;
+    private TextView lastUpdate;
 
     private View noInternetMessage;
 
@@ -36,6 +37,9 @@ public class ForecastActivity extends ActionBarActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        lastUpdate = (TextView) findViewById(R.id.last_update);
+        lastUpdate.setText("last update: ");
 
         noInternetMessage = findViewById(R.id.no_internet);
 
@@ -83,7 +87,7 @@ public class ForecastActivity extends ActionBarActivity {
                     public void run() {
                         noInternetMessage.setVisibility(View.GONE);
                         ForecastWrapper wrapper = (ForecastWrapper) result;
-                        //lastUpdate.setText("last update: " + new SimpleDateFormat(Utility.LAST_UPDATED_DATE_FORMAT).format(new Date(wrapper.getLastUpdated())));
+                        lastUpdate.setText("last update: " + new SimpleDateFormat(Utility.LAST_UPDATED_DATE_FORMAT).format(new Date(wrapper.getLastUpdated())));
                         adapter.clearThenAddAll(wrapper.getForecasts());
                     }
                 });
@@ -111,7 +115,7 @@ public class ForecastActivity extends ActionBarActivity {
                     public void run() {
                         noInternetMessage.setVisibility(View.GONE);
                         ForecastWrapper wrapper = (ForecastWrapper) result;
-                       // lastUpdate.setText("last update: " + new SimpleDateFormat(Utility.LAST_UPDATED_DATE_FORMAT).format(new Date(wrapper.getLastUpdated())));
+                       lastUpdate.setText("last update: " + new SimpleDateFormat(Utility.LAST_UPDATED_DATE_FORMAT).format(new Date(wrapper.getLastUpdated())));
                         adapter.clearThenAddAll(wrapper.getForecasts());
                     }
                 });

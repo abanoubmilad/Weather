@@ -13,7 +13,7 @@
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:textColor="@color/dynamic_text"
+        android:textColor="@color/white"
         android:textSize="@dimen/font_largest"
         android:layout_margin="20dp"/>
 
@@ -22,14 +22,14 @@
         android:id="@+id/city_temp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/dynamic_text"
+        android:textColor="@color/white"
         android:textSize="@dimen/font_extra" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/label_temp_unit"
-        android:textColor="@color/dynamic_text"
+        android:textColor="@color/white"
         android:textSize="@dimen/font_large"
         android:layout_marginRight="10dp" />
 

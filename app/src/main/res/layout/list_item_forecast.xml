@@ -11,7 +11,7 @@
         android:id="@+id/timestamp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/dynamic_text"
+        android:textColor="@color/white"
         android:textSize="@dimen/font_large"
         android:layout_margin="10dp" />
 
@@ -33,14 +33,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/label_min_temp"
-                android:textColor="@color/dynamic_text"
+                android:textColor="@color/white"
                 android:textSize="@dimen/font_normal" />
 
             <TextView
                 android:id="@+id/min_temp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/dynamic_text"
+                android:textColor="@color/white"
                 android:textSize="@dimen/font_large" />
         </LinearLayout>
 
@@ -55,14 +55,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/label_max_temp"
-                android:textColor="@color/dynamic_text"
+                android:textColor="@color/white"
                 android:textSize="@dimen/font_normal" />
 
             <TextView
                 android:id="@+id/max_temp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/dynamic_text"
+                android:textColor="@color/white"
                 android:textSize="@dimen/font_large" />
         </LinearLayout>
 
@@ -70,14 +70,14 @@
             android:id="@+id/day_temp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/dynamic_text"
+            android:textColor="@color/white"
             android:textSize="@dimen/font_extra" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/label_temp_unit"
-            android:textColor="@color/dynamic_text"
+            android:textColor="@color/white"
             android:textSize="@dimen/font_large"
             android:layout_marginRight="10dp"
             android:gravity="center_vertical" />

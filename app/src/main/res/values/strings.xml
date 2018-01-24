@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">Werpx Weather</string>
+    <string name="widget_name">Werpx Weather widget</string>
     <string name="activity_forecast">Weather Forecast</string>
     <string name="button_try_again">Try again</string>
 

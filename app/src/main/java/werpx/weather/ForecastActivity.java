@@ -88,7 +88,7 @@ public class ForecastActivity extends ActionBarActivity {
                         noInternetMessage.setVisibility(View.GONE);
                         ForecastWrapper wrapper = (ForecastWrapper) result;
                         lastUpdate.setText("last update: " + new SimpleDateFormat(Utility.LAST_UPDATED_DATE_FORMAT).format(new Date(wrapper.getLastUpdated())));
-                        adapter.clearThenAddAll(wrapper.getForecasts());
+                        adapter.clearThenAddAll(Utility.extractForecastsArrayList(wrapper.getForecasts()));
                     }
                 });
             }
@@ -116,7 +116,7 @@ public class ForecastActivity extends ActionBarActivity {
                         noInternetMessage.setVisibility(View.GONE);
                         ForecastWrapper wrapper = (ForecastWrapper) result;
                        lastUpdate.setText("last update: " + new SimpleDateFormat(Utility.LAST_UPDATED_DATE_FORMAT).format(new Date(wrapper.getLastUpdated())));
-                        adapter.clearThenAddAll(wrapper.getForecasts());
+                        adapter.clearThenAddAll(Utility.extractForecastsArrayList(wrapper.getForecasts()));
                     }
                 });
             }

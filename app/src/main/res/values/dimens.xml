@@ -3,7 +3,7 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-    <dimen name="font_extra">80sp</dimen>
+    <dimen name="font_extra">72sp</dimen>
 
     <dimen name="font_largest">32sp</dimen>
     <dimen name="font_larger">22sp</dimen>

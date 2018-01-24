@@ -7,8 +7,11 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.util.ArrayList;
+
+import io.realm.RealmList;
+import werpx.weather.data.CityWeather;
+import werpx.weather.data.Forecast;
 
 public class Utility {
     public static final String FORECAST_DATE_FORMAT = "EEE yyyy/MM/dd";
@@ -30,9 +33,22 @@ public class Utility {
     }
 
     public static long getCurrentTimeStamp() {
-        Calendar c = Calendar.getInstance();
-        c.setTime(new Date());
-        return c.get(Calendar.MILLISECOND);
+        return System.currentTimeMillis();
+    }
+
+    public static ArrayList<CityWeather> extractCitiesArrayList(RealmList<CityWeather> list) {
+        ArrayList<CityWeather> toReturn = new ArrayList<>(list.size());
+        for(CityWeather cityWeather : list){
+            toReturn.add(cityWeather);
+        }
+        return toReturn;
+    }
+    public static ArrayList<Forecast> extractForecastsArrayList(RealmList<Forecast> list ) {
+        ArrayList<Forecast> toReturn = new ArrayList<>(list.size());
+        for(Forecast forecast : list){
+            toReturn.add(forecast);
+        }
+        return toReturn;
     }
 
 

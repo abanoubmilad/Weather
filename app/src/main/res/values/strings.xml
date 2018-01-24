@@ -15,7 +15,7 @@
 
     <string name="label_timestamp">Date</string>
     <string name="label_day_temp">Day temperature</string>
-    <string name="label_min_temp">Min. temperature</string>
-    <string name="label_max_temp">Max. temperature</string>
+    <string name="label_min_temp">Min</string>
+    <string name="label_max_temp">Max</string>
 
 </resources>

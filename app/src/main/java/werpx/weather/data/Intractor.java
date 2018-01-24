@@ -17,7 +17,7 @@ public class Intractor {
 
         CitiesWrapper wrapper = realm.where(CitiesWrapper.class).equalTo("citiesWrapperID", 0).findFirst();
 
-        realm.close();
+       // realm.close();
 
         if (wrapper == null)
             viewControllerCallback.onFailure("");
@@ -31,7 +31,7 @@ public class Intractor {
 
         ForecastWrapper wrapper = realm.where(ForecastWrapper.class).equalTo("cityID", cityID).findFirst();
 
-        realm.close();
+       // realm.close();
 
         if (wrapper == null)
             viewControllerCallback.onFailure("");
@@ -60,7 +60,7 @@ public class Intractor {
                     realm.copyToRealmOrUpdate(wrapper);
                     realm.commitTransaction();
 
-                    viewControllerCallback.onSuccess(cities);
+                    viewControllerCallback.onSuccess(wrapper);
                 }
             }
         });
@@ -87,7 +87,7 @@ public class Intractor {
                     realm.copyToRealmOrUpdate(wrapper);
                     realm.commitTransaction();
 
-                    viewControllerCallback.onSuccess(forecasts);
+                    viewControllerCallback.onSuccess(wrapper);
                 }
 
             }

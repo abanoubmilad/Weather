@@ -84,7 +84,8 @@ public class MainActivity extends ActionBarActivity {
                         noInternetMessage.setVisibility(View.GONE);
                         CitiesWrapper wrapper = (CitiesWrapper) result;
                         lastUpdate.setText("last update: " + new SimpleDateFormat(Utility.LAST_UPDATED_DATE_FORMAT).format(new Date(wrapper.getLastUpdated())));
-                        adapter.clearThenAddAll(wrapper.getCities());
+                        adapter.clearThenAddAll(Utility.extractCitiesArrayList(wrapper.getCities()));
+
                     }
                 });
             }
@@ -112,7 +113,7 @@ public class MainActivity extends ActionBarActivity {
                         noInternetMessage.setVisibility(View.GONE);
                         CitiesWrapper wrapper = (CitiesWrapper) result;
                         lastUpdate.setText("last update: " + new SimpleDateFormat(Utility.LAST_UPDATED_DATE_FORMAT).format(new Date(wrapper.getLastUpdated())));
-                        adapter.clearThenAddAll(wrapper.getCities());
+                        adapter.clearThenAddAll(Utility.extractCitiesArrayList(wrapper.getCities()));
                     }
                 });
             }

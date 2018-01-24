@@ -36,15 +36,8 @@ public class CitiesWrapper extends RealmObject {
         this.lastUpdated = lastUpdated;
     }
 
-//    public RealmList<CityWeather> getCities() {
-//        return cities;
-//    }
-    public ArrayList<CityWeather> getCities() {
-        ArrayList<CityWeather> toReturn = new ArrayList<>(cities.size());
-        for(CityWeather cityWeather : cities){
-            toReturn.add(cityWeather);
-        }
-        return toReturn;
+    public RealmList<CityWeather> getCities() {
+        return cities;
     }
 
     public void setCities(RealmList<CityWeather> cities) {

@@ -46,16 +46,10 @@ public class ForecastWrapper extends RealmObject {
         this.cityID = cityID;
     }
 
-//    public RealmList<Forecast> getForecasts() {
-//        return forecasts;
-//    }
-    public ArrayList<Forecast> getForecasts() {
-        ArrayList<Forecast> toReturn = new ArrayList<>(forecasts.size());
-        for(Forecast forecast : forecasts){
-            toReturn.add(forecast);
-        }
-        return toReturn;
+    public RealmList<Forecast> getForecasts() {
+        return forecasts;
     }
+
 
     public void setForecasts(RealmList<Forecast> forecasts) {
         this.forecasts = forecasts;

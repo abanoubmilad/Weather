@@ -20,18 +20,22 @@ public class WeatherAPI {
     private final static String API_UNITS_PARAMETER = "units";
 
     private final static String CITIES = "361058,6618607,5128638,360502,2911298";
-    public static void getCityForecast(int cityID, final CustomCallback customCallback) {
+
+    private static Request prepareCityForecastRequest(int cityID) {
         HttpUrl.Builder urlBuilder = HttpUrl.parse(API_URL + "/forecast/daily").newBuilder();
         urlBuilder.addQueryParameter(API_KEY_PARAMETER, BuildConfig.openweathermap_api_key);
         urlBuilder.addQueryParameter(API_UNITS_PARAMETER, "metric");
-        urlBuilder.addQueryParameter(API_CITY_ID_PARAMETER, cityID+"");
+        urlBuilder.addQueryParameter(API_CITY_ID_PARAMETER, cityID + "");
         urlBuilder.addQueryParameter(API_CITY_FORECAST_COUNT_PARAMETER, "5");
         String url = urlBuilder.build().toString();
 
-        final Request request = new Request.Builder()
+        return new Request.Builder()
                 .url(url)
                 .build();
-        HttpClient.getInstance().newCall(request).enqueue(new Callback() {
+    }
+
+    public static void getCityForecast(int cityID, final CustomCallback customCallback) {
+        HttpClient.getInstance().newCall(prepareCityForecastRequest(cityID)).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 customCallback.onFailure(e.getMessage());
@@ -50,17 +54,26 @@ public class WeatherAPI {
 
         });
     }
-    public static void getCitiesWeather(final CustomCallback customCallback) {
+
+    public static Response getCityForecast(int cityID) throws IOException {
+        return HttpClient.getInstance().newCall(prepareCityForecastRequest(cityID)).execute();
+    }
+
+    private static Request prepareCitiesWeatherRequest() {
         HttpUrl.Builder urlBuilder = HttpUrl.parse(API_URL + "/group").newBuilder();
         urlBuilder.addQueryParameter(API_KEY_PARAMETER, BuildConfig.openweathermap_api_key);
         urlBuilder.addQueryParameter(API_UNITS_PARAMETER, "metric");
         urlBuilder.addQueryParameter(API_CITY_ID_PARAMETER, CITIES);
         String url = urlBuilder.build().toString();
 
-        Request request = new Request.Builder()
+        return new Request.Builder()
                 .url(url)
                 .build();
-        HttpClient.getInstance().newCall(request).enqueue(new Callback() {
+    }
+
+    public static void getCitiesWeather(final CustomCallback customCallback) {
+
+        HttpClient.getInstance().newCall(prepareCitiesWeatherRequest()).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 customCallback.onFailure(e.getMessage());
@@ -77,5 +90,9 @@ public class WeatherAPI {
             }
 
         });
+    }
+
+    public static Response getCitiesWeather() throws IOException {
+        return HttpClient.getInstance().newCall(prepareCitiesWeatherRequest()).execute();
     }
 }

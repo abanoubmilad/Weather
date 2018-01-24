@@ -8,11 +8,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import werpx.weather.adapter.ForecastAdapter;
 import werpx.weather.data.Forecast;
+import werpx.weather.data.ForecastWrapper;
 import werpx.weather.data.Intractor;
 
 
@@ -34,16 +38,6 @@ public class ForecastActivity extends ActionBarActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         noInternetMessage = findViewById(R.id.no_internet);
-        if(!Utility.isNetworkAvailable(getApplicationContext()))
-            noInternetMessage.setVisibility(View.VISIBLE);
-        noInternetMessage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(Utility.isNetworkAvailable(getApplicationContext())) {
-                    noInternetMessage.setVisibility(View.GONE);
-                }
-            }
-        });
 
         adapter = new ForecastAdapter(getApplicationContext(), new ArrayList<Forecast>());
         ListView lv = (ListView) findViewById(R.id.forecast_list);
@@ -55,14 +49,29 @@ public class ForecastActivity extends ActionBarActivity {
 
         ((TextView) findViewById(R.id.city_name)).setText(currentCityName);
 
-        Intractor.getCityForecast(currentCityID, new CustomCallback() {
+        noInternetMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (Utility.isNetworkAvailable(getApplicationContext())) {
+                    requestDataLive();
+                }
+            }
+        });
+        if (Utility.isNetworkAvailable(getApplicationContext()))
+            requestDataLive();
+        else
+            requestDataOffline();
+
+    }
+
+    private void requestDataOffline() {
+        Intractor.getCityForecastOfflineMode(getApplicationContext(), currentCityID, new CustomCallback() {
             @Override
             public void onFailure(String failureMessage) {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-
-
+                        noInternetMessage.setVisibility(View.VISIBLE);
                     }
                 });
             }
@@ -72,15 +81,43 @@ public class ForecastActivity extends ActionBarActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        adapter.addAll((ArrayList<Forecast>) result);
-
+                        noInternetMessage.setVisibility(View.GONE);
+                        ForecastWrapper wrapper = (ForecastWrapper) result;
+                        //lastUpdate.setText("last update: " + new SimpleDateFormat(Utility.LAST_UPDATED_DATE_FORMAT).format(new Date(wrapper.getLastUpdated())));
+                        adapter.clearThenAddAll(wrapper.getForecasts());
                     }
                 });
-
             }
         });
     }
 
+    private void requestDataLive() {
+        Intractor.getCityForecast(getApplicationContext(),currentCityID, new CustomCallback() {
+            @Override
+            public void onFailure(String failureMessage) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), "Cant get updated forecast!", Toast.LENGTH_SHORT).show();
+                        requestDataOffline();
+                    }
+                });
+            }
+
+            @Override
+            public void onSuccess(final Object result) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        noInternetMessage.setVisibility(View.GONE);
+                        ForecastWrapper wrapper = (ForecastWrapper) result;
+                       // lastUpdate.setText("last update: " + new SimpleDateFormat(Utility.LAST_UPDATED_DATE_FORMAT).format(new Date(wrapper.getLastUpdated())));
+                        adapter.clearThenAddAll(wrapper.getForecasts());
+                    }
+                });
+            }
+        });
+    }
 
 
     @Override

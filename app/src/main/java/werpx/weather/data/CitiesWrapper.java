@@ -9,7 +9,7 @@ import io.realm.annotations.PrimaryKey;
 
 public class CitiesWrapper extends RealmObject {
     @PrimaryKey
-    private final int citiesWrapperID=0;
+    private int citiesWrapperID=0;
     private long lastUpdated;
     private RealmList<CityWeather> cities;
 
@@ -49,5 +49,13 @@ public class CitiesWrapper extends RealmObject {
 
     public void setCities(RealmList<CityWeather> cities) {
         this.cities = cities;
+    }
+
+    public int getCitiesWrapperID() {
+        return citiesWrapperID;
+    }
+
+    public void setCitiesWrapperID(int citiesWrapperID) {
+        this.citiesWrapperID = citiesWrapperID;
     }
 }

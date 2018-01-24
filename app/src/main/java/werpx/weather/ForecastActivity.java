@@ -22,8 +22,8 @@ import werpx.weather.data.Intractor;
 
 
 public class ForecastActivity extends ActionBarActivity {
-    public static final String EXTRA_ARGUMENT_NAME="name";
-    public static final String EXTRA_ARGUMENT_ID="id";
+    public static final String EXTRA_ARGUMENT_NAME = "name";
+    public static final String EXTRA_ARGUMENT_ID = "id";
     private ForecastAdapter adapter;
     private int currentCityID;
     private String currentCityName;
@@ -50,8 +50,8 @@ public class ForecastActivity extends ActionBarActivity {
         lv.setAdapter(adapter);
 
         Intent intent = getIntent();
-        currentCityID=intent.getIntExtra(EXTRA_ARGUMENT_ID,-1);
-        currentCityName=intent.getStringExtra(EXTRA_ARGUMENT_NAME);
+        currentCityID = intent.getIntExtra(EXTRA_ARGUMENT_ID, -1);
+        currentCityName = intent.getStringExtra(EXTRA_ARGUMENT_NAME);
 
         ((TextView) findViewById(R.id.city_name)).setText(currentCityName);
 
@@ -62,6 +62,10 @@ public class ForecastActivity extends ActionBarActivity {
                     public void onRefresh() {
                         if (Utility.isNetworkAvailable(getApplicationContext())) {
                             requestDataLive();
+                        } else {
+                            synchronized (ForecastActivity.class) {
+                                swipe.setRefreshing(false);
+                            }
                         }
                     }
                 }
@@ -83,13 +87,17 @@ public class ForecastActivity extends ActionBarActivity {
     }
 
     private void requestDataOffline() {
+        swipe.setRefreshing(true);
         Intractor.getCityForecastOfflineMode(getApplicationContext(), currentCityID, new CustomCallback() {
             @Override
             public void onFailure(String failureMessage) {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        noInternetMessage.setVisibility(View.VISIBLE);
+                        synchronized (ForecastActivity.class) {
+                            noInternetMessage.setVisibility(View.VISIBLE);
+                            swipe.setRefreshing(false);
+                        }
                     }
                 });
             }
@@ -99,10 +107,13 @@ public class ForecastActivity extends ActionBarActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        noInternetMessage.setVisibility(View.GONE);
-                        ForecastWrapper wrapper = (ForecastWrapper) result;
-                        lastUpdate.setText("last update: " + new SimpleDateFormat(Utility.LAST_UPDATED_DATE_FORMAT).format(new Date(wrapper.getLastUpdated())));
-                        adapter.clearThenAddAll(Utility.extractForecastsArrayList(wrapper.getForecasts()));
+                        synchronized (ForecastActivity.class) {
+                            noInternetMessage.setVisibility(View.GONE);
+                            ForecastWrapper wrapper = (ForecastWrapper) result;
+                            lastUpdate.setText("last update: " + new SimpleDateFormat(Utility.LAST_UPDATED_DATE_FORMAT).format(new Date(wrapper.getLastUpdated())));
+                            adapter.clearThenAddAll(Utility.extractForecastsArrayList(wrapper.getForecasts()));
+                            swipe.setRefreshing(false);
+                        }
                     }
                 });
             }
@@ -110,6 +121,7 @@ public class ForecastActivity extends ActionBarActivity {
     }
 
     private void requestDataLive() {
+        swipe.setRefreshing(true);
         Intractor.getCityForecast(getApplicationContext(), currentCityID, new CustomCallback() {
             @Override
             public void onFailure(String failureMessage) {
@@ -127,10 +139,13 @@ public class ForecastActivity extends ActionBarActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        noInternetMessage.setVisibility(View.GONE);
-                        ForecastWrapper wrapper = (ForecastWrapper) result;
-                        lastUpdate.setText("last update: " + new SimpleDateFormat(Utility.LAST_UPDATED_DATE_FORMAT).format(new Date(wrapper.getLastUpdated())));
-                        adapter.clearThenAddAll(Utility.extractForecastsArrayList(wrapper.getForecasts()));
+                        synchronized (ForecastActivity.class) {
+                            noInternetMessage.setVisibility(View.GONE);
+                            ForecastWrapper wrapper = (ForecastWrapper) result;
+                            lastUpdate.setText("last update: " + new SimpleDateFormat(Utility.LAST_UPDATED_DATE_FORMAT).format(new Date(wrapper.getLastUpdated())));
+                            adapter.clearThenAddAll(Utility.extractForecastsArrayList(wrapper.getForecasts()));
+                            swipe.setRefreshing(false);
+                        }
                     }
                 });
             }

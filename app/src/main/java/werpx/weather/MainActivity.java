@@ -59,6 +59,10 @@ public class MainActivity extends ActionBarActivity {
                     public void onRefresh() {
                         if (Utility.isNetworkAvailable(getApplicationContext())) {
                             requestDataLive();
+                        }else{
+                            synchronized(MainActivity.class) {
+                                swipe.setRefreshing(false);
+                            }
                         }
                     }
                 }
@@ -79,13 +83,17 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void requestDataOffline() {
+        swipe.setRefreshing(true);
         Intractor.getCitiesWeatherOfflineMode(getApplicationContext(), new CustomCallback() {
             @Override
             public void onFailure(String failureMessage) {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        noInternetMessage.setVisibility(View.VISIBLE);
+                        synchronized(MainActivity.class) {
+                            noInternetMessage.setVisibility(View.VISIBLE);
+                            swipe.setRefreshing(false);
+                        }
                     }
                 });
             }
@@ -95,18 +103,20 @@ public class MainActivity extends ActionBarActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        synchronized(MainActivity.class) {
                         noInternetMessage.setVisibility(View.GONE);
                         CitiesWrapper wrapper = (CitiesWrapper) result;
                         lastUpdate.setText("last update: " + new SimpleDateFormat(Utility.LAST_UPDATED_DATE_FORMAT).format(new Date(wrapper.getLastUpdated())));
                         adapter.clearThenAddAll(Utility.extractCitiesArrayList(wrapper.getCities()));
-
-                    }
+                        swipe.setRefreshing(false);
+                    }}
                 });
             }
         });
     }
 
     private void requestDataLive() {
+        swipe.setRefreshing(true);
         Intractor.getCitiesWeather(getApplicationContext(), new CustomCallback() {
             @Override
             public void onFailure(String failureMessage) {
@@ -124,10 +134,13 @@ public class MainActivity extends ActionBarActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        noInternetMessage.setVisibility(View.GONE);
-                        CitiesWrapper wrapper = (CitiesWrapper) result;
-                        lastUpdate.setText("last update: " + new SimpleDateFormat(Utility.LAST_UPDATED_DATE_FORMAT).format(new Date(wrapper.getLastUpdated())));
-                        adapter.clearThenAddAll(Utility.extractCitiesArrayList(wrapper.getCities()));
+                        synchronized(MainActivity.class) {
+                            noInternetMessage.setVisibility(View.GONE);
+                            CitiesWrapper wrapper = (CitiesWrapper) result;
+                            lastUpdate.setText("last update: " + new SimpleDateFormat(Utility.LAST_UPDATED_DATE_FORMAT).format(new Date(wrapper.getLastUpdated())));
+                            adapter.clearThenAddAll(Utility.extractCitiesArrayList(wrapper.getCities()));
+                            swipe.setRefreshing(false);
+                        }
                     }
                 });
             }

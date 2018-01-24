@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/dynamic_text"
-        android:textSize="@dimen/font_largest"
+        android:textSize="@dimen/font_large"
         android:layout_margin="10dp" />
 
     <LinearLayout
@@ -34,16 +34,14 @@
                 android:layout_height="wrap_content"
                 android:text="@string/label_min_temp"
                 android:textColor="@color/dynamic_text"
-                android:textSize="@dimen/font_normal"
-                android:layout_margin="5dp" />
+                android:textSize="@dimen/font_normal" />
 
             <TextView
                 android:id="@+id/min_temp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/dynamic_text"
-                android:textSize="@dimen/font_largest"
-                android:layout_margin="10dp" />
+                android:textSize="@dimen/font_large" />
         </LinearLayout>
 
         <LinearLayout
@@ -58,16 +56,14 @@
                 android:layout_height="wrap_content"
                 android:text="@string/label_max_temp"
                 android:textColor="@color/dynamic_text"
-                android:textSize="@dimen/font_normal"
-                android:layout_margin="5dp" />
+                android:textSize="@dimen/font_normal" />
 
             <TextView
                 android:id="@+id/max_temp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/dynamic_text"
-                android:textSize="@dimen/font_largest"
-                android:layout_margin="10dp" />
+                android:textSize="@dimen/font_large" />
         </LinearLayout>
 
         <TextView

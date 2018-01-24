@@ -2,6 +2,7 @@ package werpx.weather;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,6 +26,7 @@ public class MainActivity extends ActionBarActivity {
     private CityWeatherAdapter adapter;
     private View noInternetMessage;
     private TextView lastUpdate;
+    private SwipeRefreshLayout swipe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,18 @@ public class MainActivity extends ActionBarActivity {
                 startActivity(intent);
             }
         });
+
+        swipe = (SwipeRefreshLayout) findViewById(R.id.swipe);
+        swipe.setOnRefreshListener(
+                new SwipeRefreshLayout.OnRefreshListener() {
+                    @Override
+                    public void onRefresh() {
+                        if (Utility.isNetworkAvailable(getApplicationContext())) {
+                            requestDataLive();
+                        }
+                    }
+                }
+        );
         noInternetMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,7 +78,7 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
-    private void requestDataOffline() {
+    private synchronized void requestDataOffline() {
         Intractor.getCitiesWeatherOfflineMode(getApplicationContext(), new CustomCallback() {
             @Override
             public void onFailure(String failureMessage) {
@@ -92,7 +106,7 @@ public class MainActivity extends ActionBarActivity {
         });
     }
 
-    private void requestDataLive() {
+    private synchronized void requestDataLive() {
         Intractor.getCitiesWeather(getApplicationContext(), new CustomCallback() {
             @Override
             public void onFailure(String failureMessage) {

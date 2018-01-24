@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 
+
 android {
     compileSdkVersion 23
     buildToolsVersion "24.0.3"
@@ -20,16 +21,22 @@ android {
             it.buildConfigField 'String', 'openweathermap_api_key', openweathermap_api_key
         }
     }
+
     defaultConfig {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-}
+        packagingOptions {
+            exclude 'LICENSE.txt'
+        }
 
+
+}
 dependencies {
+
+
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.android.support:support-v4:23.4.0'
-    compile group: 'com.google.code.gson', name: 'gson', version: '2.7'
     compile 'com.squareup.okhttp3:okhttp:3.9.1'
     compile 'io.realm:realm-android:0.87.4'
 
@@ -37,4 +44,6 @@ dependencies {
     androidTestCompile 'com.android.support.test:runner:0.5'
     androidTestCompile 'com.android.support.test:rules:0.5'
     androidTestCompile 'org.hamcrest:hamcrest-library:1.3'
+
+
 }

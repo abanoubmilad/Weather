@@ -9,12 +9,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
 import werpx.weather.adapter.CityWeatherAdapter;
+import werpx.weather.data.CitiesWrapper;
 import werpx.weather.data.CityWeather;
 import werpx.weather.data.Intractor;
 
@@ -30,19 +32,9 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         lastUpdate = (TextView) findViewById(R.id.last_update);
-        lastUpdate.setText("last update: " + new SimpleDateFormat(Utility.LAST_UPDATED_DATE_FORMAT).format(new Date()));
+        lastUpdate.setText("last update: ");
 
         noInternetMessage = findViewById(R.id.no_internet);
-        if (!Utility.isNetworkAvailable(getApplicationContext()))
-            noInternetMessage.setVisibility(View.VISIBLE);
-        noInternetMessage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (Utility.isNetworkAvailable(getApplicationContext())) {
-                    noInternetMessage.setVisibility(View.GONE);
-                }
-            }
-        });
 
         adapter = new CityWeatherAdapter(getApplicationContext(), new ArrayList<CityWeather>());
         ListView lv = (ListView) findViewById(R.id.cities_list);
@@ -57,15 +49,29 @@ public class MainActivity extends ActionBarActivity {
                 startActivity(intent);
             }
         });
+        noInternetMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (Utility.isNetworkAvailable(getApplicationContext())) {
+                    requestDataLive();
+                }
+            }
+        });
+        if (Utility.isNetworkAvailable(getApplicationContext()))
+            requestDataLive();
+        else
+            requestDataOffline();
 
-        Intractor.getCitiesWeather(new CustomCallback() {
+    }
+
+    private void requestDataOffline() {
+        Intractor.getCitiesWeatherOfflineMode(getApplicationContext(), new CustomCallback() {
             @Override
             public void onFailure(String failureMessage) {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-
-
+                        noInternetMessage.setVisibility(View.VISIBLE);
                     }
                 });
             }
@@ -75,9 +81,38 @@ public class MainActivity extends ActionBarActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        noInternetMessage.setVisibility(View.GONE);
+                        CitiesWrapper wrapper = (CitiesWrapper) result;
+                        lastUpdate.setText("last update: " + new SimpleDateFormat(Utility.LAST_UPDATED_DATE_FORMAT).format(new Date(wrapper.getLastUpdated())));
+                        adapter.clearThenAddAll(wrapper.getCities());
+                    }
+                });
+            }
+        });
+    }
 
-                        adapter.addAll((ArrayList<CityWeather>) result);
+    private void requestDataLive() {
+        Intractor.getCitiesWeather(getApplicationContext(), new CustomCallback() {
+            @Override
+            public void onFailure(String failureMessage) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(),"Cant get updated weather!",Toast.LENGTH_SHORT).show();
+                        requestDataOffline();
+                    }
+                });
+            }
 
+            @Override
+            public void onSuccess(final Object result) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        noInternetMessage.setVisibility(View.GONE);
+                        CitiesWrapper wrapper = (CitiesWrapper) result;
+                        lastUpdate.setText("last update: " + new SimpleDateFormat(Utility.LAST_UPDATED_DATE_FORMAT).format(new Date(wrapper.getLastUpdated())));
+                        adapter.clearThenAddAll(wrapper.getCities());
                     }
                 });
             }

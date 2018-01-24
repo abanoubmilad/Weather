@@ -35,7 +35,7 @@ public class APIJsonParser {
             for (int i = 0; i < forecastArray.length(); i++) {
                 JSONObject obj = forecastArray.getJSONObject(i);
                 JSONObject tempObj = obj.getJSONObject("temp");
-                result.add(new Forecast(obj.getLong("dt"),
+                result.add(new Forecast(obj.getLong("dt")*1000,
                         tempObj.getDouble("day"),
                         tempObj.getDouble("min"), tempObj.getDouble("max")));
             }

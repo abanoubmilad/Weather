@@ -39,7 +39,7 @@ public class ForecastAdapter extends Adapter<Forecast> {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.timestamp.setText(dateFormatter.format(new Date(forecastDay.getTimeStamp()*1000)));
+        holder.timestamp.setText(dateFormatter.format(new Date(forecastDay.getTimeStamp())));
         holder.temp.setText(forecastDay.getDayTemp()+"");
         holder.min.setText(forecastDay.getMinTemp()+"");
         holder.max.setText(forecastDay.getMaxTemp()+"");

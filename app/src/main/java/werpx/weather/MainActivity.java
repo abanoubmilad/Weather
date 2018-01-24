@@ -78,7 +78,7 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
-    private synchronized void requestDataOffline() {
+    private void requestDataOffline() {
         Intractor.getCitiesWeatherOfflineMode(getApplicationContext(), new CustomCallback() {
             @Override
             public void onFailure(String failureMessage) {
@@ -106,7 +106,7 @@ public class MainActivity extends ActionBarActivity {
         });
     }
 
-    private synchronized void requestDataLive() {
+    private void requestDataLive() {
         Intractor.getCitiesWeather(getApplicationContext(), new CustomCallback() {
             @Override
             public void onFailure(String failureMessage) {

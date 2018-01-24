@@ -2,6 +2,7 @@ package werpx.weather;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,6 +28,7 @@ public class ForecastActivity extends ActionBarActivity {
     private int currentCityID;
     private String currentCityName;
     private TextView lastUpdate;
+    private SwipeRefreshLayout swipe;
 
     private View noInternetMessage;
 
@@ -52,6 +54,18 @@ public class ForecastActivity extends ActionBarActivity {
         currentCityName=intent.getStringExtra(EXTRA_ARGUMENT_NAME);
 
         ((TextView) findViewById(R.id.city_name)).setText(currentCityName);
+
+        swipe = (SwipeRefreshLayout) findViewById(R.id.swipe);
+        swipe.setOnRefreshListener(
+                new SwipeRefreshLayout.OnRefreshListener() {
+                    @Override
+                    public void onRefresh() {
+                        if (Utility.isNetworkAvailable(getApplicationContext())) {
+                            requestDataLive();
+                        }
+                    }
+                }
+        );
 
         noInternetMessage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,7 +110,7 @@ public class ForecastActivity extends ActionBarActivity {
     }
 
     private void requestDataLive() {
-        Intractor.getCityForecast(getApplicationContext(),currentCityID, new CustomCallback() {
+        Intractor.getCityForecast(getApplicationContext(), currentCityID, new CustomCallback() {
             @Override
             public void onFailure(String failureMessage) {
                 runOnUiThread(new Runnable() {
@@ -115,7 +129,7 @@ public class ForecastActivity extends ActionBarActivity {
                     public void run() {
                         noInternetMessage.setVisibility(View.GONE);
                         ForecastWrapper wrapper = (ForecastWrapper) result;
-                       lastUpdate.setText("last update: " + new SimpleDateFormat(Utility.LAST_UPDATED_DATE_FORMAT).format(new Date(wrapper.getLastUpdated())));
+                        lastUpdate.setText("last update: " + new SimpleDateFormat(Utility.LAST_UPDATED_DATE_FORMAT).format(new Date(wrapper.getLastUpdated())));
                         adapter.clearThenAddAll(Utility.extractForecastsArrayList(wrapper.getForecasts()));
                     }
                 });

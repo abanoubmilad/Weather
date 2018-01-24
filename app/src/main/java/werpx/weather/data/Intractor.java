@@ -12,13 +12,11 @@ import werpx.weather.network.WeatherAPI;
 
 public class Intractor {
 
-    public static void getCitiesWeatherOfflineMode(Context context, final CustomCallback viewControllerCallback) {
+    public synchronized static  void getCitiesWeatherOfflineMode(Context context, final CustomCallback viewControllerCallback) {
         Realm realm = Realm.getInstance(context);
 
         CitiesWrapper wrapper = realm.where(CitiesWrapper.class).equalTo("citiesWrapperID", 0).findFirst();
 
-       // realm.close();
-
         if (wrapper == null)
             viewControllerCallback.onFailure("");
         else
@@ -26,13 +24,11 @@ public class Intractor {
 
     }
 
-    public static void getCityForecastOfflineMode(final Context context, int cityID, final CustomCallback viewControllerCallback) {
+    public synchronized static void getCityForecastOfflineMode(final Context context, int cityID, final CustomCallback viewControllerCallback) {
         Realm realm = Realm.getInstance(context);
 
         ForecastWrapper wrapper = realm.where(ForecastWrapper.class).equalTo("cityID", cityID).findFirst();
 
-       // realm.close();
-
         if (wrapper == null)
             viewControllerCallback.onFailure("");
         else
@@ -40,7 +36,7 @@ public class Intractor {
 
     }
 
-    public static void getCitiesWeather(final Context context, final CustomCallback viewControllerCallback) {
+    public synchronized static void getCitiesWeather(final Context context, final CustomCallback viewControllerCallback) {
         WeatherAPI.getCitiesWeather(new CustomCallback() {
             @Override
             public void onFailure(String failureMessage) {
@@ -55,7 +51,7 @@ public class Intractor {
                 else {
                     CitiesWrapper wrapper = new CitiesWrapper(Utility.getCurrentTimeStamp(), cities);
                     Realm realm = Realm.getInstance(context);
-                    // Persist your data in a transaction
+                    // Persist
                     realm.beginTransaction();
                     realm.copyToRealmOrUpdate(wrapper);
                     realm.commitTransaction();
@@ -67,7 +63,7 @@ public class Intractor {
 
     }
 
-    public static void getCityForecast(final Context context, final int cityID, final CustomCallback viewControllerCallback) {
+    public synchronized static void getCityForecast(final Context context, final int cityID, final CustomCallback viewControllerCallback) {
         WeatherAPI.getCityForecast(cityID, new CustomCallback() {
             @Override
             public void onFailure(String failureMessage) {
@@ -82,7 +78,7 @@ public class Intractor {
                 else {
                     ForecastWrapper wrapper = new ForecastWrapper(Utility.getCurrentTimeStamp(), cityID, forecasts);
                     Realm realm = Realm.getInstance(context);
-                    // Persist your data in a transaction
+                    // Persist
                     realm.beginTransaction();
                     realm.copyToRealmOrUpdate(wrapper);
                     realm.commitTransaction();
